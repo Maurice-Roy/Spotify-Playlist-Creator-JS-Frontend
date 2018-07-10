@@ -15,22 +15,28 @@ class App extends Component {
     fetch('https://api.spotify.com/v1/me', {
       headers: {'Authorization': 'Bearer ' + accessToken}
     }).then(response => response.json())
-    .then(data => this.setState({
-      user: {
-        ...this.state.user,
-        name: data.display_name
-      }
-    }))
+    .then((data) => {
+      console.log('USER DATA: ', data)
+      this.setState({
+        user: {
+          ...this.state.user,
+          name: data.display_name
+        }
+      })
+    })
 
-    fetch('https://api.spotify.com/v1/me/playlists', {
+    fetch('https://api.spotify.com/v1/me/tracks', {
       headers: {'Authorization': 'Bearer ' + accessToken}
     }).then(response => response.json())
-    .then(data => this.setState({
-      user: {
-        ...this.state.user,
-        playlists: data.items
-      }
-    }))
+    .then((data) => {
+      console.log('TRACK DATA: ', data)
+      // this.setState({
+      //   user: {
+      //     ...this.state.user,
+      //     playlists: data.items
+      //   }
+      // })
+    })
   }
 
   componentDidUpdate() {
